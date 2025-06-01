@@ -20,3 +20,10 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## API routes
+There are two API routes for accessing the devices and filters as documented below. The
+purpose of those is to not have to bundle the entire json file and provide the opportunity
+to paginate the result althought that is not the case currently
+
+- Devices: `/api/devices?name={name}&filters={filter1,filter2}`
+- Filters: `/api/filters`
