@@ -1,7 +1,12 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Device, Filter } from "./datasource.types";
 
-function useAPI<T>(path: string, parameters: string) {
+function useAPI<T>({ path, parameters }: {
+  path: string;
+  parameters: string;
+}) {
   const [result, setResult] = useState<T[]>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -25,7 +30,15 @@ function useAPI<T>(path: string, parameters: string) {
   };
 }
 
-export function useDevices(name?: string, filters?: string[]) {
+export function useDevices({
+  initialDevices,
+  name,
+  filters,
+}: {
+  initialDevices?: Device[];
+  name?: string;
+  filters?: string[];
+}) {
   const searchParams = new URLSearchParams();
 
   if (name) {
@@ -40,18 +53,26 @@ export function useDevices(name?: string, filters?: string[]) {
     result: devices,
     loading,
     error,
-  } = useAPI<Device>("devices", searchParams.toString());
+  } = useAPI<Device>({
+    path: "devices",
+    parameters: searchParams.toString(),
+  });
 
-  return { devices, loading, error };
+  return {
+    devices: devices && devices?.length > 0 ? devices : initialDevices,
+    loading,
+    error,
+  };
 }
 
 export function useFilters() {
   const searchParams = new URLSearchParams();
 
-  const { result: filters, loading, error } = useAPI<Filter>(
-    "filters",
-    searchParams.toString()
-  );
+  const {
+    result: filters,
+    loading,
+    error,
+  } = useAPI<Filter>({ path: "filters", parameters: searchParams.toString() });
 
   return { filters, loading, error };
 }
