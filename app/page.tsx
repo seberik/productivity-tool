@@ -1,9 +1,12 @@
-import styles from "./page.module.css";
+import ProductDirectory from "@/components/ProductDirectory";
+import { getAllDevices } from "@/lib/datasource";
 
-export default function Home() {
+export default async function Home() {
+  const { devices } = await getAllDevices();
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>Productivity tool</main>
-    </div>
+    <main>
+      <ProductDirectory initialDevices={devices} />
+    </main>
   );
 }
