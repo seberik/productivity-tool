@@ -1,0 +1,11 @@
+.container {
+  padding: var(--base-unit);
+  background-color: rgba(244, 245, 246);
+  display: flex;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  gap: var(--base-unit);
+}

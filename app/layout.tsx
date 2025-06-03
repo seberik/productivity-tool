@@ -1,4 +1,4 @@
-import "./globals.css";
+import { SiteHeader } from "@/components/SiteHeader/SiteHeader";
 
 export default function RootLayout({
   children,
@@ -8,6 +8,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <SiteHeader />
         {children}
       </body>
     </html>
