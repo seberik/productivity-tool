@@ -37,7 +37,7 @@ export function useDevices({
 }: {
   initialDevices?: Device[];
   name?: string;
-  filters?: string[];
+  filters?: string;
 }) {
   const searchParams = new URLSearchParams();
 
@@ -45,8 +45,8 @@ export function useDevices({
     searchParams.append("name", name);
   }
 
-  if (filters && filters.length > 0) {
-    searchParams.append("filters", filters.join(","));
+  if (filters) {
+    searchParams.append("filters", filters);
   }
 
   const {
