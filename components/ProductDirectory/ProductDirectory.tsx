@@ -1,33 +1,31 @@
 "use client";
 
-import Link from "next/link";
 import { Device } from "@/lib/datasource.types";
 import { useDevices } from "@/lib/useApiClient";
+import { Search } from "./Search";
+import { Products } from "./Products";
+import { useSearchParams } from "next/navigation";
+import { DisplayOption } from "./ProductDirectory.types";
 
-export default function ProductDirectory({ initialDevices }: { initialDevices: Device[]}) {
-  const { devices } = useDevices({ initialDevices });
+export default function ProductDirectory({
+  initialDevices,
+}: {
+  initialDevices: Device[];
+}) {
+  const searchParams = useSearchParams();
+
+  const { devices } = useDevices({
+    initialDevices,
+    filters: searchParams.get("filters") as string,
+    name: searchParams.get("searchQuery") as string,
+  });
+
+  const displayOption = searchParams.get("displayOption") as DisplayOption ?? DisplayOption.GRID;
 
   return (
     <>
-      {devices?.length} devices:
-      <table>
-        <thead>
-          <tr>
-            <th>Product line</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {devices?.map((device) => (
-            <tr key={device.id}>
-              <td>
-                <Link href={`/device/${device.id}`}>{device.product.name}</Link>
-              </td>
-              <td>{device.line.name}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Search hits={devices?.length ?? 0} />
+      {devices && <Products displayOption={displayOption} devices={devices} />}
     </>
   );
 }

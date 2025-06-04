@@ -1,0 +1,29 @@
+.filterToggle {
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.filters {
+  position: absolute;
+  transform: translateX(-100%) translateY(calc(var(--base-unit)*2));
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--base-unit);
+
+  background-color: #fff;
+  padding: var(--base-unit);
+}
+
+.visible {
+  opacity: 1;
+}
+
+.filter {
+  display: flex;
+  gap: var(--base-unit);
+}

@@ -1,0 +1,12 @@
+@use '../../../../app/styles/mixins.scss' as *;
+
+.input {
+  padding: var(--base-unit);
+  border: transparent;
+  border-radius: var(--border-radius-small);
+  background-color: var(--input-background);
+
+  &:focus {
+    @include focus;
+  }
+}

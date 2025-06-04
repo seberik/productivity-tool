@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.query {
+  display: flex;
+  gap: calc(var(--base-unit) * 2);
+  align-items: center;
+}
+
+.count {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small)
+}
+
+.controls {
+  display: flex;
+  gap: calc(var(--base-unit) * 3);
+  padding: var(--base-unit);
+  align-items: center;
+}
+

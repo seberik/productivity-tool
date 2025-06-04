@@ -1,8 +1,23 @@
 import ProductDirectory from "@/components/ProductDirectory";
-import { getAllDevices } from "@/lib/datasource";
+import { searchDevices } from "@/lib/datasource";
 
-export default async function Home() {
-  const { devices } = await getAllDevices();
+type ProductDirectoryProps = {
+  searchParams: Promise<{
+    searchQuery: string;
+    filters: string[];
+    displayOption: string;
+  }>;
+};
+
+export default async function ProductDirectoryPage({
+  searchParams,
+}: ProductDirectoryProps) {
+  const { filters, searchQuery } = await searchParams;
+
+  const devices = await searchDevices({
+    filters,
+    name: searchQuery,
+  });
 
   return (
     <main>
