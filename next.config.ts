@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
 
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.svc.ui.com',
+      },
+    ]
+  },
 };
 
 export default nextConfig;
