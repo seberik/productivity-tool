@@ -2,9 +2,9 @@
   --color-primary: #006FFF;
   --base-unit: 8px;
 
-  --color-text-muted: rgba(128, 136, 147, 1);
+  --color-text-primary: rgba(38,38,38,1);  
+  --color-text-secondary: rgba(128, 136, 147, 1);
   --color-text-normal: rgba(0, 0, 0, 0.65);
-  --color-text-dark: rgba(38,38,38,1);  
 
   --input-background: rgba(246 246 248, 1);
   --input-background-active: rgba(246, 246, 248, 1);
@@ -13,4 +13,6 @@
   
   --border-radius-small: 4px;
   --focus-width: 2px;
+
+  --font-size-small: 14px;
 }
