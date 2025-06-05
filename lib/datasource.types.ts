@@ -3,18 +3,22 @@ export interface Filter {
   name: string;
 }
 
+interface Attribute {
+  label: string;
+  value: string | number;
+}
+
 export interface Device {
   id: string;
+  name: string;
   line: {
     id: string;
     name: string;
   };
-  product: {
-    name: string;
-  };
   images: {
     default: string;
-  };
+  }
+  attributes: Attribute[]
 }
 
 export interface DeviceList {

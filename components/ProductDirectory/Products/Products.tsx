@@ -17,7 +17,7 @@ export function Products({
     >
       {devices.map((device) => (
         <div key={device.id}>
-          <Link shallow href={`/device/${device.id}`}>{device.product.name}</Link></div>
+          <Link shallow href={`/device/${device.id}`}>{device.name}</Link></div>
       ))}
     </div>
   );

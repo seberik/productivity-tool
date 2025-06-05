@@ -18,7 +18,7 @@ export function AutocompleteResult({
   device: Device;
   searchString: string;
 }) {
-  const [start, match, end] = splitByMatch(device.product.name, searchString);
+  const [start, match, end] = splitByMatch(device.name, searchString);
 
   return (
     <div>

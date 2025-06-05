@@ -12,7 +12,7 @@ export default async function DevicePage({ params }: DevicePageProps) {
 
   return (
     <div>
-      <h1>{device.product.name}</h1>
+      <h1>{device.name}</h1>
 
       <DeviceImage width={imageSize} height={imageSize} device={device} />
     </div>
