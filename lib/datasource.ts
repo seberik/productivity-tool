@@ -9,6 +9,7 @@ function transformToDevice(source: Datasource["devices"][number]): Device {
     line: source.line,
     name: source.product.name,
     images: source.images,
+    shortnames: source.shortnames,
     attributes: [
       { label: "Product Line", value: source.line.name },
       { label: "ID", value: source.id },

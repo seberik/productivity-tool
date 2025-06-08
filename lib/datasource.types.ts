@@ -11,6 +11,7 @@ interface Attribute {
 export interface Device {
   id: string;
   name: string;
+  shortnames: string[];
   line: {
     id: string;
     name: string;
