@@ -57,7 +57,7 @@ export function Search({ hits, defaultValues }: SearchProps) {
       </div>
       <div className={styles.controls}>
         <DisplayOptions onChange={handleDisplayOptionsChange} />
-        <Filters onChange={handleFilterChange} />
+        <Filters onChange={handleFilterChange} initialSelected={formState.filters} />
       </div>
     </div>
   );

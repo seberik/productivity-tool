@@ -5,10 +5,15 @@ import styles from "./Filters.module.scss";
 import { FilterProps } from "./Filters.types";
 import { Text } from "../../../common/Text";
 
-export function Filters({ onChange }: FilterProps) {
+export function Filters({ onChange, initialSelected }: FilterProps) {
   const [showFilters, setShowFilters] = useState(false);
   const { filters } = useFilters();
-  const [checked, setChecked] = useState<Record<string, boolean>>({});
+  const [checked, setChecked] = useState<Record<string, boolean>>(
+    initialSelected.reduce<Record<string, true>>((acc, key) => {
+      acc[key] = true;
+      return acc;
+    }, {})
+  );
   const componentRef = useRef<HTMLDivElement>(null);
 
   const handleClick = (id: string) => {
