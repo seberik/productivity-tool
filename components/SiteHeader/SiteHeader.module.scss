@@ -1,11 +1,32 @@
+@use 'mixins.scss' as *;
+
 .container {
-  padding: var(--base-unit);
+  padding: var(--base-unit) calc(var(--base-unit) * 3);
   background-color: rgba(244, 245, 246);
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  padding: var(--base-unit);
+  color: var(--color-text-secondary);
+
+  &:hover {
+    color: var(--color-text-highlighted)
+  }
+
+  &:focus {
+    @include focus;
+  }
+}
+
+.logoImage {
+  display: block;
 }
 
 .brand {
   display: flex;
   gap: var(--base-unit);
+  align-items: center;
 }
