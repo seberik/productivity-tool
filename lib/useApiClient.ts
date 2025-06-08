@@ -1,14 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Device, Filter } from "./datasource.types";
 
-function useAPI<T>({ path, parameters }: { path: string; parameters: string }) {
+function useAPI<T>({
+  path,
+  parameters,
+  skip = false,
+}: {
+  path: string;
+  parameters: string;
+  skip?: boolean;
+}) {
   const [result, setResult] = useState<T[]>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    if (skip) {
+      return;
+    }
+
     setLoading(true);
 
     fetch(`/api/${path}?${parameters}`)
@@ -18,7 +30,7 @@ function useAPI<T>({ path, parameters }: { path: string; parameters: string }) {
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false));
-  }, [path, parameters]);
+  }, [path, parameters, skip]);
 
   return {
     result,
@@ -37,6 +49,7 @@ export function useDevices({
   filters?: string[] | string | null;
 }) {
   const searchParams = new URLSearchParams();
+  const firstRender = useRef(false);
 
   if (name) {
     searchParams.append("name", name);
@@ -45,10 +58,17 @@ export function useDevices({
   if (filters && Array.isArray(filters)) {
     filters.forEach((filter) => searchParams.append("filters", filter));
   }
-  
-  if (typeof filters === 'string') {
+
+  if (typeof filters === "string") {
     searchParams.append("filters", filters);
   }
+
+  useEffect(() => {
+    if (!firstRender.current) {
+      firstRender.current = true;
+      return;
+    }
+  }, []);
 
   const {
     result: devices,
@@ -57,6 +77,7 @@ export function useDevices({
   } = useAPI<Device>({
     path: "devices",
     parameters: searchParams.toString(),
+    skip: initialDevices && !firstRender.current
   });
 
   return {
