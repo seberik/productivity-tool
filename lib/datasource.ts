@@ -12,7 +12,7 @@ function transformToDevice(source: Datasource["devices"][number]): Device {
     shortnames: source.shortnames,
     attributes: [
       { label: "Product Line", value: source.line.name },
-      { label: "ID", value: source.id },
+      { label: "ID", value: source.line.id },
       {
         label: "Max. Power",
         value: source.unifi?.network?.power?.capacity ?? "n/a",
@@ -62,8 +62,8 @@ export async function searchDevices({
   name,
   filters,
 }: {
-  name?: string;
-  filters?: string[];
+  name?: string | null;
+  filters?: string[] | null;
 }) {
   const { devices } = await getAllDevices();
 

@@ -4,7 +4,7 @@ import { searchDevices } from "@/lib/datasource";
 type ProductDirectoryProps = {
   searchParams: Promise<{
     searchQuery: string;
-    filters: string[];
+    filter: string[];
     displayOption: string;
   }>;
 };
@@ -12,10 +12,10 @@ type ProductDirectoryProps = {
 export default async function ProductDirectoryPage({
   searchParams,
 }: ProductDirectoryProps) {
-  const { filters, searchQuery } = await searchParams;
+  const { filter, searchQuery } = await searchParams;
 
   const devices = await searchDevices({
-    filters,
+    filters: filter,
     name: searchQuery,
   });
 

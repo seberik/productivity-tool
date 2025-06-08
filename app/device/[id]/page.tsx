@@ -1,8 +1,6 @@
 import { getDeviceById } from "@/lib/datasource";
-import { DeviceImage } from "@/components/common/DeviceImage/DeviceImage";
 import { DevicePageProps } from "./page.type";
-
-const imageSize = 292;
+import { Product } from "@/components/Product/Product";
 
 export default async function DevicePage({ params }: DevicePageProps) {
   const { id } = await params;
@@ -11,10 +9,6 @@ export default async function DevicePage({ params }: DevicePageProps) {
   if (!device) return null;
 
   return (
-    <div>
-      <h1>{device.name}</h1>
-
-      <DeviceImage width={imageSize} height={imageSize} device={device} />
-    </div>
+    <Product device={device} />
   );
 }
