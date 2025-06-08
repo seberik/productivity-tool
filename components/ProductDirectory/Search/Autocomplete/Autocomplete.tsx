@@ -4,9 +4,9 @@ import { AutocompleteResult } from "./AutocompleteResult";
 import styles from "./Autocomplete.module.scss";
 import { AutocompleteProps } from "./Autocomplete.types";
 
-export function Autocomplete({ onSubmit }: AutocompleteProps) {
+export function Autocomplete({ onSubmit, initialValue }: AutocompleteProps) {
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(initialValue);
 
   const deferredSearchString = useDeferredValue(searchQuery);
   const { devices } = useDevices({ name: deferredSearchString });
@@ -18,6 +18,8 @@ export function Autocomplete({ onSubmit }: AutocompleteProps) {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     switch (event.key) {
+      case "Esc":
+        setShowSuggestions(false);
       case "Enter":
         onSubmit(searchQuery);
         setShowSuggestions(false);
@@ -28,7 +30,7 @@ export function Autocomplete({ onSubmit }: AutocompleteProps) {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <input
         className={styles.input}
         placeholder="Search"
@@ -38,15 +40,8 @@ export function Autocomplete({ onSubmit }: AutocompleteProps) {
         onKeyDown={handleKeyDown}
       />
       {showSuggestions && searchQuery && (
-        <div
-          style={{
-            background: "grey",
-            position: "absolute",
-            width: 300,
-            height: 500,
-            overflow: "scroll",
-          }}
-        >
+        <div className={styles.result}>
+          {devices?.length === 0 && <span>No suggestions.</span>} 
           {devices?.map((device) => (
             <AutocompleteResult
               key={device.id}
@@ -56,6 +51,6 @@ export function Autocomplete({ onSubmit }: AutocompleteProps) {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 }

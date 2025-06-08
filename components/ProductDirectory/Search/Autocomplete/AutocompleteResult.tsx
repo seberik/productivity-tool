@@ -1,5 +1,6 @@
-import { Device } from "@/lib/datasource.types";
 import Link from "next/link";
+import { Device } from "@/lib/datasource.types";
+import styles from "./Autocomplete.module.scss";
 
 function splitByMatch(fullText: string, searchString: string) {
   const index = fullText.toLowerCase().indexOf(searchString.toLowerCase());
@@ -21,12 +22,10 @@ export function AutocompleteResult({
   const [start, match, end] = splitByMatch(device.name, searchString);
 
   return (
-    <div>
-      <Link href={`/device/${device.id}`}>
-        {start}
-        <b>{match}</b>
-        {end}
-      </Link>
-    </div>
+    <Link className={styles.resultItem} href={`/device/${device.id}`}>
+      {start}
+      <b>{match}</b>
+      {end}
+    </Link>
   );
 }

@@ -1,12 +1,46 @@
-@use '../../../../app/styles/mixins.scss' as *;
+@use 'mixins.scss' as *;
+
+$inputWidth: 300;
+
+.container {
+  position: relative;
+}
 
 .input {
+  width: $inputWidth;
   padding: var(--base-unit);
   border: transparent;
   border-radius: var(--border-radius-small);
   background-color: var(--input-background);
 
+  &:hover {
+    background-color: var(--input-background-hover);
+  }
+
   &:focus {
     @include focus;
   }
+}
+
+.result {
+  margin-top: var(--base-unit);
+  padding: calc(var(--base-unit) / 2);
+  position: absolute;
+  width: $inputWidth;
+  overflow: scroll;
+  z-index: 1;
+  border-bottom-left-radius: var(--base-unit);
+  border-bottom-right-radius: var(--base-unit);
+  box-shadow: 0px 10px 38px -12px rgba(0,0,0,0.68);
+}
+
+.resultItem {
+  background-color: #fff;
+  display: block;
+
+  &:hover, &:focus {
+    background-color: var(--color-text-secondary);
+  }
+
+  padding: var(--base-unit)
 }

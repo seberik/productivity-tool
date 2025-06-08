@@ -1,24 +1,13 @@
-import styles from "./Products.module.scss";
-import classNames from "classnames";
-import Link from "next/link";
+import styles from './Products.module.scss';
 import { ProductsProps } from "./Products.types";
 import { DisplayOption } from "../ProductDirectory.types";
+import { List } from "./List";
+import { Grid } from "./Grid";
 
-export function Products({
-  devices,
-  displayOption,
-}: ProductsProps) {
-  return (
-    <div
-      className={classNames({
-        [styles.grid]: displayOption === DisplayOption.GRID,
-        [styles.list]: displayOption === DisplayOption.LIST,
-      })}
-    >
-      {devices.map((device) => (
-        <div key={device.id}>
-          <Link shallow href={`/device/${device.id}`}>{device.name}</Link></div>
-      ))}
-    </div>
-  );
+export function Products({ devices, displayOption }: ProductsProps) {
+  return <div className={styles.container}>{displayOption === DisplayOption.LIST ? (
+    <List devices={devices} />
+  ) : (
+    <Grid devices={devices} />
+  )}</div>;
 }

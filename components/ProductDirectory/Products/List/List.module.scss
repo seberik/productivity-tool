@@ -1,0 +1,17 @@
+.image {
+  width: 32px;
+  display: block;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+  gap: var(--base-unit);
+  padding: calc(var(--base-unit) / 2);
+}
+
+.tableHeading {
+  font-weight: var(--font-weight-medium);
+}

@@ -1,13 +1,31 @@
+@use 'mixins.scss' as *;
+
+.container {
+  position: relative;
+}
+
 .filterToggle {
   appearance: none;
   background: none;
   border: none;
   cursor: pointer;
+
+  color: var(--color-text-secondary);
+  
+  &:hover {
+    color: var(--color-text-highlighted);
+  }
+
+  &:focus {
+    @include focus;
+  }
 }
 
 .filters {
   position: absolute;
-  transform: translateX(-100%) translateY(calc(var(--base-unit)*2));
+  // transform: translateX(-100%) translateY(var(--base-unit));
+  margin-top: var(--base-unit);
+  right: 0;
   opacity: 0;
   transition: opacity 0.2s;
 
@@ -16,7 +34,12 @@
   gap: var(--base-unit);
 
   background-color: #fff;
-  padding: var(--base-unit);
+  padding: calc(var(--base-unit) * 2);
+  box-shadow: 0px 10px 38px -12px rgba(0,0,0,0.68);
+
+  border-radius: var(--base-unit);
+
+  z-index: 1;
 }
 
 .visible {
@@ -26,4 +49,5 @@
 .filter {
   display: flex;
   gap: var(--base-unit);
+  text-wrap: nowrap;
 }

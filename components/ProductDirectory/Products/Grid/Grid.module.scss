@@ -1,0 +1,52 @@
+@use 'mixins.scss' as *;
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: calc(var(--base-unit) * 2)
+}
+
+.card {
+  border: 1px solid var(--border-color);
+  display: block;
+  border-radius: calc(var(--base-unit) / 2);
+
+  &:focus {
+    @include focus
+  }
+
+  .image {
+    position: relative;
+    height: 100px;
+    background-color: #F9FAFA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .imageOverlay {
+    position: absolute;
+    right: var(--base-unit);
+    top: var(--base-unit);
+  }
+  
+  .label {
+    color: var(--color-text-highlighted);
+    background: #FFFFFF;
+    padding: calc(var(--base-unit) / 4);
+    font-size: var(--font-size-small);
+  }
+  
+  .description {
+    padding: calc(var(--base-unit) * 2) var(--base-unit) var(--base-unit);
+  }
+  
+  .title {
+    margin-bottom: calc(var(--base-unit) * 3.5);
+  }
+  
+  .shortnames {
+    font-size: var(--font-size-small);
+    color: var(--color-text-secondary)
+  }
+}

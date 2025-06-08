@@ -1,4 +1,23 @@
+@use 'mixins.scss' as *;
+
 .container {
   display: flex;
-  gap: calc(var(--base-unit) * 2);
+}
+
+.iconButton {
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  border: 0;
+  border-radius: calc(var(--base-unit) / 2);
+  color: var(--color-text-secondary);
+  
+  &:hover {
+    color: var(--color-text-highlighted);
+    background-color: rgba(246 246 248);
+  }
+
+  &:focus {
+    @include focus;
+  }
 }

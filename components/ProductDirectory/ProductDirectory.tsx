@@ -6,6 +6,7 @@ import { Search } from "./Search";
 import { Products } from "./Products";
 import { useSearchParams } from "next/navigation";
 import { DisplayOption } from "./ProductDirectory.types";
+import styles from "./ProductDirectory.module.scss";
 
 export default function ProductDirectory({
   initialDevices,
@@ -14,18 +15,25 @@ export default function ProductDirectory({
 }) {
   const searchParams = useSearchParams();
 
+  const filters = searchParams.getAll("filter");
+  const searchQuery = searchParams.get("searchQuery") ?? undefined;
+
   const { devices } = useDevices({
     initialDevices,
-    filters: searchParams.get("filters") as string,
-    name: searchParams.get("searchQuery") as string,
+    filters,
+    name: searchQuery,
   });
 
-  const displayOption = searchParams.get("displayOption") as DisplayOption ?? DisplayOption.GRID;
+  const displayOption =
+    (searchParams.get("displayOption") as DisplayOption) ?? DisplayOption.GRID;
 
   return (
-    <>
-      <Search hits={devices?.length ?? 0} />
+    <div className={styles.container}>
+      <Search
+        hits={devices?.length ?? 0}
+        defaultValues={{ filters, searchQuery, displayOption }}
+      />
       {devices && <Products displayOption={displayOption} devices={devices} />}
-    </>
+    </div>
   );
 }

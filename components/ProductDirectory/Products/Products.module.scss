@@ -1,12 +1,3 @@
 .container {
-
-}
-
-.list {
-  display: block;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  padding: calc(var(--base-unit) * 3) 0;
 }

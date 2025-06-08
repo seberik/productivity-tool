@@ -3,6 +3,7 @@ import classNames from "classnames";
 import React, { useState } from "react";
 import styles from "./Filters.module.scss";
 import { FilterProps } from "./Filters.types";
+import {Text} from '../../../common/Text'
 
 export function Filters({ onChange }: FilterProps) {
   const [showFilters, setShowFilters] = useState(false);
@@ -39,6 +40,7 @@ export function Filters({ onChange }: FilterProps) {
           [styles.visible]: showFilters,
         })}
       >
+        <Text weight="medium">Product&nbsp;Line</Text>
         {filters?.map((filter) => (
           <div className={styles.filter} key={filter.id}>
             <input
