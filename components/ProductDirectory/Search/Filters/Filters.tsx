@@ -1,14 +1,15 @@
 import { useFilters } from "@/lib/useApiClient";
 import classNames from "classnames";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Filters.module.scss";
 import { FilterProps } from "./Filters.types";
-import {Text} from '../../../common/Text'
+import { Text } from "../../../common/Text";
 
 export function Filters({ onChange }: FilterProps) {
   const [showFilters, setShowFilters] = useState(false);
   const { filters } = useFilters();
   const [checked, setChecked] = useState<Record<string, boolean>>({});
+  const componentRef = useRef<HTMLDivElement>(null);
 
   const handleClick = (id: string) => {
     const update = {
@@ -21,12 +22,29 @@ export function Filters({ onChange }: FilterProps) {
     onChange(Object.keys(update).filter((filterId) => update[filterId]));
   };
 
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent | TouchEvent) {
+      if (
+        componentRef.current &&
+        !componentRef.current.contains(event.target as Node)
+      ) {
+        setShowFilters(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [componentRef]);
+
   const handleFilterToggleClick = () => {
     setShowFilters(!showFilters);
   };
 
   return (
-    <div className={styles.container}>
+    <div ref={componentRef} className={styles.container}>
       <button
         type="button"
         className={styles.filterToggle}
