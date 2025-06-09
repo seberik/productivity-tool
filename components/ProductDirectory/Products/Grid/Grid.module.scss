@@ -2,8 +2,18 @@
 
 .container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: calc(var(--base-unit) * 2)
+  gap: calc(var(--base-unit) * 2);
+
+  grid-template-columns: repeat(1, 1fr);
+
+  @include respond-to(small) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to(medium) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
 }
 
 .card {
