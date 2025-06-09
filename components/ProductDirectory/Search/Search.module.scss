@@ -1,6 +1,13 @@
+@use 'mixins.scss' as *;
+
 .container {
-  display: flex;
-  justify-content: space-between;
+  padding: var(--base-unit);
+
+  @include respond-to(medium) {
+    padding: 0;
+    justify-content: space-between;
+    display: flex;
+  }
 }
 
 .query {
@@ -11,13 +18,17 @@
 
 .count {
   color: var(--color-text-secondary);
-  font-size: var(--font-size-small)
+  font-size: var(--font-size-small);
+  display: none;
+
+  @include respond-to(medium) {
+    display: block;
+  }
 }
 
 .controls {
   display: flex;
   gap: calc(var(--base-unit) * 3);
-  padding: var(--base-unit);
   align-items: center;
 }
 

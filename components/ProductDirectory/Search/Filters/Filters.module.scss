@@ -40,6 +40,12 @@
   border-radius: var(--base-unit);
 
   z-index: 1;
+
+  transform: translateX(50%);
+
+  @include respond-to(medium) {
+    transform: none;
+  }
 }
 
 .visible {
