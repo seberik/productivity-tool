@@ -1,10 +1,23 @@
+@use 'mixins.scss' as *;
+
 .container {
-  width: 70%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: calc(var(--base-unit) * 2);
-  padding: calc(var(--base-unit) * 4);
+  
+  width: 100%;
+  grid-template-columns: 1fr;
+  padding: var(--base-unit);
+  
+  @include respond-to(medium) {
+    padding: calc(var(--base-unit) * 4);
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+  
+  @include respond-to(large) {
+    width: 70%;
+  }
 }
 
 .heading {

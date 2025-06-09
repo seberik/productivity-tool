@@ -1,3 +1,9 @@
+@use "mixins.scss" as *;
+
 .container {
-  padding: 0 calc(var(--base-unit) * 6);
+  padding: 0 calc(var(--base-unit) * 1);
+  
+  @include respond-to(large) {
+    padding: 0 calc(var(--base-unit) * 6);
+  }
 }
