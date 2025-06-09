@@ -10,9 +10,13 @@
 }
 
 .query {
-  display: flex;
-  gap: calc(var(--base-unit) * 2);
-  align-items: center;
+  width: 100%;
+
+  @include respond-to(medium) {
+    display: flex;
+    gap: calc(var(--base-unit) * 2);
+    align-items: center;
+  }  
 }
 
 .count {
@@ -29,5 +33,6 @@
   display: flex;
   gap: calc(var(--base-unit) * 3);
   align-items: center;
+  justify-content: flex-end;
 }
 
