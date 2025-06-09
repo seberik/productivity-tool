@@ -31,5 +31,7 @@ to paginate the result althought that is not the case currently
 ## Future work
 - Use library e.g. react hook form for form handling
 - Use something like React Query or proper implementation for transferring data from server to client
-- Use e.g. Radix components for the
-- Add some test coverage
+- Use e.g. Radix components for the autocomplete component
+- Add missing test coverage
+- Use proper design tokens and design system components
+- Improve rendering performance by paginating the list / grid
