@@ -1,9 +1,10 @@
 import { useFilters } from "@/lib/useApiClient";
 import classNames from "classnames";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./Filters.module.scss";
 import { FilterProps } from "./Filters.types";
 import { Text } from "../../../common/Text";
+import { useClickOutside } from "@/lib/useClickOutside";
 
 export function Filters({ onChange, initialSelected }: FilterProps) {
   const [showFilters, setShowFilters] = useState(false);
@@ -27,22 +28,7 @@ export function Filters({ onChange, initialSelected }: FilterProps) {
     onChange(Object.keys(update).filter((filterId) => update[filterId]));
   };
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent | TouchEvent) {
-      if (
-        componentRef.current &&
-        !componentRef.current.contains(event.target as Node)
-      ) {
-        setShowFilters(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [componentRef]);
+  useClickOutside(componentRef, () => setShowFilters(false));
 
   const handleFilterToggleClick = () => {
     setShowFilters(!showFilters);
