@@ -1,8 +1,9 @@
 import { useDevices } from "@/lib/useApiClient";
-import { ChangeEvent, useDeferredValue, useState } from "react";
+import { ChangeEvent, useDeferredValue, useRef, useState } from "react";
 import { AutocompleteResult } from "./AutocompleteResult";
 import styles from "./Autocomplete.module.scss";
 import { AutocompleteProps } from "./Autocomplete.types";
+import { useClickOutside } from "@/lib/useClickOutside";
 
 export function Autocomplete({ onSubmit, initialValue }: AutocompleteProps) {
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -10,6 +11,9 @@ export function Autocomplete({ onSubmit, initialValue }: AutocompleteProps) {
 
   const deferredSearchString = useDeferredValue(searchQuery);
   const { devices } = useDevices({ name: deferredSearchString });
+
+  const componentRef = useRef<HTMLDivElement>(null)
+  useClickOutside(componentRef, () => setShowSuggestions(false));
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
@@ -30,7 +34,7 @@ export function Autocomplete({ onSubmit, initialValue }: AutocompleteProps) {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={componentRef}>
       <input
         className={styles.input}
         placeholder="Search"
