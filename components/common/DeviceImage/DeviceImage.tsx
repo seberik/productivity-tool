@@ -24,6 +24,7 @@ export function DeviceImage({
 s%2F${device.id}%2Fdefault%2F${device.images.default}.png&w=${width}&q=75`}
       alt={device.name}
       loading="lazy"
+      unoptimized
     ></Image>
   );
 }
